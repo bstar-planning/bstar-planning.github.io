@@ -254,7 +254,7 @@
                   \({\boldsymbol{q}^m}^M\) represent the lower and upper bounds.
                 </p>
               </li>
-              
+
               <li><b>Collision-free configurations:</b>
                 <p class="math-content">
                   \[\text{sd}(\boldsymbol{q}^b,\boldsymbol{q}^{m}_{i})\geq 0,\]
@@ -283,12 +283,18 @@
               B* addresses the inherently non-convex base placement problem through a two-layer hierarchical
               optimization framework:
             </p>
+
             <ol>
               <li><b>Outer layer with progressive constraint tightening:</b> The terminal optimization
                 problem is temporarily reformulated into a more tractable form through systematic constraint relaxation,
-                particularly the base mobility constraint. Specifically, <b>we treat the fixed base as mobile</b>,
-                transforming the timestep-invariant base configuration \(\boldsymbol{q}^b\) into a time-varying sequence
-                \(\boldsymbol{q}^b_{1:t}\), effectively introducing three additional DoFs per timestep.
+                particularly the base mobility constraint.
+
+                <p class="math-content">
+                  Specifically, <b>we treat the fixed base as mobile</b>,
+                  transforming the timestep-invariant base configuration \(\boldsymbol{q}^b\) into a time-varying
+                  sequence
+                  \(\boldsymbol{q}^b_{1:t}\), effectively introducing three additional DoFs per timestep.
+                </p>
 
                 <p class="math-content">
                   To ensure convergence to a fixed base configuration, we introduce a base movement penalty with an
@@ -306,9 +312,35 @@
                   where \(\bar{\boldsymbol{q}}^{b}\) is the arithmetic mean of base poses across all steps.
                 </p>
 
+                <p class="math-content">
+                  Thereby, all constraints involving the fixed base \(\boldsymbol{q}^b\) must be reformulated for the
+                  relaxed problem. Each instance of \(\boldsymbol{q}^b\) in the original constraints is replaced with
+                  its
+                  time-indexed counterpart \(\boldsymbol{q}^b_i\) at the corresponding timestep \(i\). These constraints
+                  are subsequently transformed into penalty terms to accommodate potentially infeasible initial
+                  conditions, ensuring the algorithm can start from arbitrary initial states while maintaining numerical
+                  stability.
+                </p>
+
               </li>
-              <li><b>Inner Layer:</b> Addresses the non-convexities of each outer-layer subproblem by sequential local
-                linearization.</li>
+              <li><b>Inner Layer with sequential linearization:</b> B* addresses the non-convexities of each outer-layer
+                subproblem by sequential local linearization within trust regions.
+                <p class="math-content">
+                  Given a non-convex function \(\phi(x)\), we construct its convex approximation \(\phi_c(x)\) through
+                  first-order Taylor expansion around the current point \(x_0\):
+                </p>
+
+                <p class="math-content">
+                  \[\phi_c(x) = \phi(x_0) + \dot{\phi}(x_0)(x-x_0),\]
+                </p>
+
+                <p class="math-content">
+                  where \(\dot{\phi}(x_0)\) represents the first-order derivative at \(x_0\). The trust region size
+                  adapts based on approximation quality—expanding when the approximation performs well and contracting
+                  when it poorly represents the original function.
+                </p>
+
+              </li>
             </ol>
             <p class="math-content">
               The two-layer hierarchical optimization framework effectively transforms the original problem into a
