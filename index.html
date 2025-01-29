@@ -191,10 +191,11 @@
       <div class="columns is-centered has-text-centered">
         <div class="column">
           <h2 class="title">B* Method</h2>
-          <div class="content has-text-justified">
+          <h3 class="subsection-title">Problem Formulation</h3>
+          <div class="content">
             <p class="math-content">
-              We formulate the base placement problem for fixed-base manipulators as an optimization problem. Given an
-              ordered sequence of desired end-effector poses in \(\textit{SE}(3)\):
+              For fixed-base manipulators, we formulate the base placement challenge as an optimization problem.
+              Consider an ordered sequence of desired end-effector poses in \(\textit{SE}(3)\):
             </p>
 
             <p class="math-content">
@@ -203,7 +204,7 @@
             </p>
 
             <p class="math-content">
-              we seek to compute:
+              We seek to compute:
             </p>
 
             <ol>
@@ -211,20 +212,48 @@
                 \textit{SE}(2)\)</li>
               <li>The corresponding feasible joint configurations
                 \(\boldsymbol{q}^{m}_{1:t}=[\boldsymbol{q}_{1},\boldsymbol{q}_{2},\cdots,\boldsymbol{q}_{t}]\in\mathbb{R}^{t\times
-                n}\), where \(n\) is the DoFs of the manipulator. </li>
+                n}\), where \(n\) is DoF of the manipulator.</li>
             </ol>
 
             <p class="math-content">
-              This formulation not only solves the <b>base placement</b> problem but also enables simultaneous <b>path planning</b>.
-              Primarily, these configurations should reach each target pose \(\boldsymbol{x}_i\), imposing
-              equality constraints:
+              This comprehensive formulation addresses the <b>base placement</b> problem and also enables simultaneous
+              <b>path planning</b>. Primarily, these configurations must reach each target pose
+              \(\boldsymbol{x}_i\), which leads to the following equality constraints:
             </p>
 
             <p class="math-content">
               \[\psi(\boldsymbol{q}^b, \boldsymbol{q}^m_{i}) = \boldsymbol{x}_i,\quad i = 1, 2, \ldots, t,\]
             </p>
-            <p>where \(\psi(\cdot)\) is the forward kinematics function.</p>
-            <p>For more details, please refer to the paper.</p>
+
+            <p class="math-content">
+              where \(\psi(\cdot)\) represents the forward kinematics function. Additionally, the solution must satisfy
+              these inequality constraints:
+            </p>
+
+            <ol>
+              <li>Base placement limits: \({\boldsymbol{q}^b}^{m} \preccurlyeq \boldsymbol{q}^b \preccurlyeq
+                {\boldsymbol{q}^b}^{M},\) where \({\boldsymbol{q}^b}^{m}\) and \({\boldsymbol{q}^b}^{M}\) define the
+                lower and upper bounds.</li>
+              <li>Joint limits: \({\boldsymbol{q}^m}^{m} \preccurlyeq \boldsymbol{q}^m_i \preccurlyeq
+                {\boldsymbol{q}^m}^{M}, \quad i = 1, 2, \ldots, t\) with \({\boldsymbol{q}^m}^m\) and
+                \({\boldsymbol{q}^m}^M\) representing the lower and upper bounds.</li>
+              <li>Collision-free configurations: \(\text{sd}(\boldsymbol{q}^b,\boldsymbol{q}^{m}_{i})\geq 0,\quad i = 1,
+                2, \ldots, t,\) where \(\text{sd}(\cdot)\) denotes the signed distance function.</li>
+            </ol>
+
+            <p class="math-content">
+              Finally, the objective function could be very flexible and can be tailored to specific task requirements.
+              It can be designed either as a feasibility test or to minimize the total path length:
+            </p>
+
+            <p class="math-content">
+              \[f(\boldsymbol{q}^b,\boldsymbol{q}^{m}_{1:t}) = \sum_{i=1}^{t-1}
+              \|\boldsymbol{q}^{m}_{i+1}-\boldsymbol{q}^{m}_{i}\|_1.\]
+            </p>
+
+            <p class="math-content">
+              For a more detailed analysis and complete methodology, please refer to our paper.
+            </p>
           </div>
         </div>
       </div>
