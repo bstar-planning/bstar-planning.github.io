@@ -142,3 +142,13 @@ body {
   font-weight: bold;
   margin: 1.5rem 0 1rem 0;
 }
+
+.math-content {
+  margin: 1rem 0;
+}
+ol {
+  padding-left: 1.5rem;
+}
+li {
+  margin: 0.5rem 0;
+}
