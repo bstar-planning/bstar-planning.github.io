@@ -72,7 +72,7 @@
                 Zhi Han<sup>3</sup>,
               </span>
               <span class="author-block">
-                <a href="https://yzhu.io/" target="_blank">Yixin Zhu</a><sup>1 ✉</sup>
+                <a href="https://yzhu.io/" target="_blank">Yixin Zhu</a><sup>1 ✉️</sup>
               </span>
             </div>
 
@@ -192,20 +192,13 @@
         <div class="column">
           <h2 class="title">B* Method</h2>
           <div class="content has-text-justified">
-            <p>Our B* method is a novel optimization framework for determining the optimal base placement that unifies
-              multiple objectives without relying on pre-computed databases. B* addresses this inherently non-convex
-              problem via a two-layer hierarchical approach: The outer layer systematically manages terminal constraints
-              through progressively tightening them, particularly the base mobility constraint, enabling feasible
-              initialization and broad solution space exploration. Concurrently, the inner layer addresses the
-              non-convexities of each outer-layer subproblem by sequential local linearization, effectively transforming
-              the original problem into a tractable sequential linear programming (SLP). Comprehensive evaluations across
-              multiple robot platforms and task complexities demonstrate the effectiveness of B*: it achieves solution
-              optimality five orders of magnitude better than sampling-based approaches while maintaining perfect success
-              rates, all with reduced computational overhead. Operating directly in configuration space, B* not only
-              solves the base placement problem but also enables simultaneous path planning with customizable optimization
-              criteria, making it a versatile framework for various robotic motion planning challenges. B* serves as a
-              crucial initialization tool for robotic applications, effectively bridging the gap between theoretical motion
-              planning and practical deployment where feasible trajectory existence is fundamental.</p>
+            <p>We formulate the base placement problem for fixed-base manipulators as an optimization problem. Given an
+              ordered sequence of desired end-effector poses in \(\textit{SE}(3)\), we seek to compute the optimal base
+              placement \(\boldsymbol{q}^b=[x^{b},y^{b},\theta^{b}]^{\transpose}\in \textit{SE}(2)\) and corresponding
+              feasible joint configurations
+              \(\boldsymbol{q}^{m}_{1:t}=[\boldsymbol{q}_{1},\boldsymbol{q}_{2},\cdots,\boldsymbol{q}_{t}]\in\mathbb{R}^{t\times
+              n}\) to reach each target pose \(\boldsymbol{x}_i\), where \(n\) is DoF of the manipulator.
+            </p>
           </div>
         </div>
       </div>
