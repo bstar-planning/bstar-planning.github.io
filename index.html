@@ -192,13 +192,38 @@
         <div class="column">
           <h2 class="title">B* Method</h2>
           <div class="content has-text-justified">
-            <p>We formulate the base placement problem for fixed-base manipulators as an optimization problem. Given an
-              ordered sequence of desired end-effector poses in \(\textit{SE}(3)\), we seek to compute the optimal base
-              placement \(\boldsymbol{q}^b=[x^{b},y^{b},\theta^{b}]^{\transpose}\in \textit{SE}(2)\) and corresponding
-              feasible joint configurations
-              \(\boldsymbol{q}^{m}_{1:t}=[\boldsymbol{q}_{1},\boldsymbol{q}_{2},\cdots,\boldsymbol{q}_{t}]\in\mathbb{R}^{t\times
-              n}\) to reach each target pose \(\boldsymbol{x}_i\), where \(n\) is DoF of the manipulator.
+            <p class="math-content">
+              We formulate the base placement problem for fixed-base manipulators as an optimization problem. Given an
+              ordered sequence of desired end-effector poses in \(\textit{SE}(3)\):
             </p>
+
+            <p class="math-content">
+              \[\boldsymbol{x}_{1:t} =
+              [\boldsymbol{x}_{1},\boldsymbol{x}_{2},\cdots,\boldsymbol{x}_{t}]\in\mathbb{R}^{t\times 6}\]
+            </p>
+
+            <p class="math-content">
+              we seek to compute:
+            </p>
+
+            <ol>
+              <li>The optimal base placement \(\boldsymbol{q}^b=[x^{b},y^{b},\theta^{b}]^{\mathsf{T}}\in
+                \textit{SE}(2)\)</li>
+              <li>The corresponding feasible joint configurations
+                \(\boldsymbol{q}^{m}_{1:t}=[\boldsymbol{q}_{1},\boldsymbol{q}_{2},\cdots,\boldsymbol{q}_{t}]\in\mathbb{R}^{t\times
+                n}\), where \(n\) is the degrees of freedom (DoFs) of the manipulator. </li>
+            </ol>
+
+            <p class="math-content">
+              This formulation not only solves the base placement problem but also enables simultaneous path planning.
+              Primarily, these configurations should reach each target pose \(\boldsymbol{x}_i\), imposing
+              equality constraints:
+            </p>
+
+            <p class="math-content">
+              \psi(\boldsymbol{q}^b, \boldsymbol{q}^m_{i}) = \boldsymbol{x}_i,\quad i = 1, 2, \ldots, t,
+            </p>
+            <p>where \(\psi(\cdot)\) is the forward kinematics function.</p>
           </div>
         </div>
       </div>
