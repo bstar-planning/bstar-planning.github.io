@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="keywords" content="Base placement, motion planning, and robotics" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    B*: Efficient and Optimal Base Placement for Fixed-Base Manipulators
+  </title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico" />
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet" />
+
+  <link rel="stylesheet" href="static/css/bulma.min.css" />
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css" />
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css" />
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
+  <link rel="stylesheet" href="static/css/index.css" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+
+  <!-- MathJax -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</head>
+
+<body>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              B*: Efficient and Optimal Base Placement for Fixed-Base Manipulators
+            </h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://zihangzhao.com/" target="_blank">Zihang Zhao</a><sup>1,2 *</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://lycui.com/" target="_blank">Leiyao Cui</a><sup>1,3 *</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://siruixie.github.io/" target="_blank">Sirui Xie</a><sup>1 *</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://saiyao233.github.io/" target="_blank">Saiyao Zhang</a><sup>1,3</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://leleucla.github.io/" target="_blank">Lecheng Ruan</a><sup>4</sup>,
+              </span>
+              <span class="author-block">
+                Zhi Han<sup>3</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://yzhu.io/" target="_blank">Yixin Zhu</a><sup>1 ✉</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <sup>1</sup> Institute for Artificial Intelligence, Peking University
+              </span>
+              <span class="author-block">
+                <sup>2</sup> LeapZenith AI Research
+              </span>
+              <span class="author-block">
+                <sup>3</sup> University of Chinese Academy of Sciences
+              </span>
+              <span class="author-block">
+                <sup>4</sup> College of Engineering, Peking University
+              </span>
+              <span class="eql-cntrb"><small><br /><sup>*</sup> Equal Contributor</small></span>
+              <span class="eql-cntrb"><small><br /><sup>✉</sup> Corresponding Contributor</small></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Arxiv PDF link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="https://github.com/YOUR REPO HERE" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teaser video-->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <video poster="" id="tree" autoplay controls muted loop height="100%">
+          <!-- Your video here -->
+          <source src="static/videos/supp_video.mp4" type="video/mp4" />
+        </video>
+        <h2 class="subtitle has-text-centered">
+          Optimization Process of B*
+        </h2>
+      </div>
+    </div>
+  </section>
+  <!-- End teaser video -->
+
+  <!-- Paper abstract -->
+  <section class="section hero">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>Proper base placement is crucial for task execution feasibility and performance of fixed-base
+              manipulators, the dominant solution in robotic automation. Current methods rely on pre-computed kinematics
+              databases generated through sampling to search for solutions. However, they face an inherent trade-off
+              between solution optimality and computational efficiency when determining sampling resolution—a challenge
+              that intensifies when considering long-horizon trajectories, collision avoidance, and task-specific
+              requirements. To address these limitations, we present B*, a novel optimization framework for determining
+              the optimal base placement that unifies these multiple objectives without relying on pre-computed
+              databases. B* addresses this inherently non-convex problem via a two-layer hierarchical approach: The
+              outer layer systematically manages terminal constraints through progressively tightening them,
+              particularly the base mobility constraint, enabling feasible initialization and broad solution space
+              exploration. Concurrently, the inner layer addresses the non-convexities of each outer-layer subproblem by
+              sequential local linearization, effectively transforming the original problem into a tractable sequential
+              linear programming (SLP). Comprehensive evaluations across multiple robot platforms and task complexities
+              demonstrate the effectiveness of B*: it achieves solution optimality five orders of magnitude better than
+              sampling-based approaches while maintaining perfect success rates, all with reduced computational
+              overhead. Operating directly in configuration space, B* not only solves the base placement problem but
+              also enables simultaneous path planning with customizable optimization criteria, making it a versatile
+              framework for various robotic motion planning challenges. B* serves as a crucial initialization tool for
+              robotic applications, effectively bridging the gap between theoretical motion planning and practical
+              deployment where feasible trajectory existence is fundamental.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End paper abstract -->
+
+  <!-- Qualitative results -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title">Qualitative Results</h2>
+          <div class="cis-centered">
+            <figure class="has-text-justified">
+              <img src="static/images/success_rate.svg" alt="Success Rate">
+              <figcaption class="subtitle is-6" style="margin-bottom: 3rem">
+                <b>Success rate comparison between baseline methods using different numbers of inverse kinematics (IK)
+                  solutions (b-10, b-100, b-1000) and B* (B*).</b> While baseline methods with more IK samples show
+                higher
+                success rates at low complexity levels, their performance deteriorates sharply as the complexity level
+                \(l\)
+                increases. With just 10 samples (b-10), the baseline struggles even at level 1, while 1000 samples
+                (b-1000)
+                maintain moderate success through level 2 before failing. In contrast, B* maintains 100% success rate
+                across
+                all complexity levels \(l\) (see Eq. (14) in the manuscript).
+              </figcaption>
+            </figure>
+          </div>
+          <div class="is-centered">
+            <figure class="has-text-justified">
+              <img src="static/images/solution_optimality.svg" alt="Solution Optimality">
+              <figcaption class="subtitle is-6" style="margin-bottom: 3rem">
+                <b>Solution optimality (absolute trajectory error (ATE)) (see Eq. (15)
+                  in the manuscript) comparison between baseline methods (b-10, b-100, b-1000; left axis) and B* (B*;
+                  right
+                  axis) across complexity levels.</b> Baseline methods, even with increased inverse kinematics (IK)
+                samples,
+                achieve only millimeter-level precision due to sampling resolution limits. B* achieves five orders of
+                magnitude better precision by operating in
+                continuous configuration space. Box plots show error distributions: boxes indicate interquartile range
+                (IQR), center lines represent medians, and whiskers extend to 1.5\(\times\)IQR beyond quartiles.
+              </figcaption>
+            </figure>
+          </div>
+          <div class="is-centered">
+            <figure class="has-text-justified">
+              <img src="static/images/run_time.svg" alt="Run Time">
+              <figcaption class="subtitle is-6" style="margin-bottom: 3rem">
+                <b>Runtime comparison between baseline methods (b-10, b-100, b-1000)
+                  and B* (B*) across complexity levels</b>. While baseline methods show increased runtime with higher
+                inverse kinematics (IK) sample counts, B* demonstrates superior efficiency with linear scaling (fit
+                shown:
+                \(\log_{10}(\text{time}) = 0.376\log_2 l - 0.907\)). Box plots show runtime distributions with outliers
+                above 100 s excluded for visualization clarity: boxes indicate interquartile range, center lines
+                represent medians, and whiskers extend to 1.5\(\times\)IQR beyond quartiles.
+              </figcaption>
+            </figure>
+          </div>
+          <div class="is-centered">
+            <figure class="has-text-justified">
+              <img src="static/images/num_of_retries.svg" alt="Number of Retries">
+              <figcaption class="subtitle is-6"><b>Number of initialization retries across complexity levels.</b> At
+                lower
+                levels (1-4), the method requires approximately one retry on average, with a relatively small variance.
+                However, higher complexity levels (5-6) show both increased mean retry counts and larger standard
+                deviations. This trend reveals the growing challenge of random initialization in complex scenarios,
+                where
+                more variables and constraints make finding viable initial solutions more difficult.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End qualitative results -->
+
+  <!-- Paper acknowledgment -->
+  <section class="section hero">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Acknowledgment</h2>
+          <div class="content has-text-justified">
+            <p>We thank Dr. Chi Zhang (BIGAI), Yuyang Li (PKU), and Youqian Peng (PKU) for useful discussions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End paper acknowledgment -->
+
+  <!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>BibTex Code Here</code></pre>
+    </div>
+  </section>
+  <!--End BibTex citation -->
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This page was built using the
+              <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project
+                Page Template</a>
+              which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              You are free to borrow the source code of this
+              website, we just ask that you link back to this page in the
+              footer. <br />
+              This website is licensed under a
+              <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons
+                Attribution-ShareAlike 4.0 International
+                License</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
