@@ -231,14 +231,39 @@
             </p>
 
             <ol>
-              <li><b>Base placement limits:</b> \({\boldsymbol{q}^b}^{m} \preccurlyeq \boldsymbol{q}^b \preccurlyeq
-                {\boldsymbol{q}^b}^{M},\) where \({\boldsymbol{q}^b}^{m}\) and \({\boldsymbol{q}^b}^{M}\) define the
-                lower and upper bounds.</li>
-              <li><b>Joint limits:</b> \({\boldsymbol{q}^m}^{m} \preccurlyeq \boldsymbol{q}^m_i \preccurlyeq
-                {\boldsymbol{q}^m}^{M}\) with \({\boldsymbol{q}^m}^m\) and
-                \({\boldsymbol{q}^m}^M\) representing the lower and upper bounds.</li>
-              <li><b>Collision-free configurations:</b> \(\text{sd}(\boldsymbol{q}^b,\boldsymbol{q}^{m}_{i})\geq 0,\)
-                where \(\text{sd}(\cdot)\) denotes the signed distance function.</li>
+              <li><b>Base placement limits:</b>
+                <p class="math-content">
+                  \[{\boldsymbol{q}^b}^{m} \preccurlyeq \boldsymbol{q}^b \preccurlyeq
+                  {\boldsymbol{q}^b}^{M},\]
+                </p>
+
+                <p class="math-content">
+                  where \({\boldsymbol{q}^b}^{m}\) and \({\boldsymbol{q}^b}^{M}\) define the
+                  lower and upper bounds.
+                </p>
+              </li>
+
+              <li><b>Joint limits:</b>
+                <p class="math-content">
+                  \[{\boldsymbol{q}^m}^{m} \preccurlyeq \boldsymbol{q}^m_i \preccurlyeq
+                  {\boldsymbol{q}^m}^{M},\]
+                </p>
+
+                <p class="math-content">
+                  where \({\boldsymbol{q}^m}^m\) and
+                  \({\boldsymbol{q}^m}^M\) represent the lower and upper bounds.
+                </p>
+              </li>
+              
+              <li><b>Collision-free configurations:</b>
+                <p class="math-content">
+                  \[\text{sd}(\boldsymbol{q}^b,\boldsymbol{q}^{m}_{i})\geq 0,\]
+                </p>
+
+                <p class="math-content">
+                  where \(\text{sd}(\cdot)\) denotes the signed distance function.
+                </p>
+              </li>
             </ol>
 
             <p class="math-content">
@@ -262,12 +287,14 @@
               <li><b>Outer layer with progressive constraint tightening:</b> The terminal optimization
                 problem is temporarily reformulated into a more tractable form through systematic constraint relaxation,
                 particularly the base mobility constraint. Specifically, <b>we treat the fixed base as mobile</b>,
-                transforming
-                the timestep-invariant base configuration \(\boldsymbol{q}^b\) into a time-varying sequence
-                \(\boldsymbol{q}^b_{1:t}\), effectively introducing three additional \ac{dof} per timestep. To ensure
-                convergence to a fixed base configuration, we introduce a base movement penalty with an
-                iteration-dependent coefficient \(\mu(j)\) that increases with outer loop iteration \(j\) The modified
-                objective function \(f'(\boldsymbol{q}^b_{1:t},\boldsymbol{q}^{m}_{1:t};\mu(j))\) becomes:
+                transforming the timestep-invariant base configuration \(\boldsymbol{q}^b\) into a time-varying sequence
+                \(\boldsymbol{q}^b_{1:t}\), effectively introducing three additional DoFs per timestep.
+
+                <p class="math-content">
+                  To ensure convergence to a fixed base configuration, we introduce a base movement penalty with an
+                  iteration-dependent coefficient \(\mu(j)\) that increases with outer loop iteration \(j\) The modified
+                  objective function \(f'(\boldsymbol{q}^b_{1:t},\boldsymbol{q}^{m}_{1:t};\mu(j))\) becomes:
+                </p>
 
                 <p class="math-content">
                   \[f'(\boldsymbol{q}^b_{1:t},\boldsymbol{q}^{m}_{1:t};\mu(j)) =
@@ -276,7 +303,7 @@
                 </p>
 
                 <p class="math-content">
-                  where \(\bar{\boldsymbol{q}}^{b}\) is the arithmetic mean of base poses across all steps. 
+                  where \(\bar{\boldsymbol{q}}^{b}\) is the arithmetic mean of base poses across all steps.
                 </p>
 
               </li>
@@ -284,9 +311,8 @@
                 linearization.</li>
             </ol>
             <p class="math-content">
-              The two-layer hierarchical
-              optimization framework effectively transforms the original problem into a tractable sequential linear
-              programming (SLP).
+              The two-layer hierarchical optimization framework effectively transforms the original problem into a
+              tractable sequential linear programming (SLP).
             </p>
 
             <p class="math-content">
