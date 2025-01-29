@@ -191,7 +191,7 @@
       <div class="columns is-centered has-text-centered">
         <div class="column">
           <h2 class="title">B* Method</h2>
-          <h2 class="subsection-title" style="font-size: 1.4rem; font-weight: bold; margin: 1.5rem 0 1rem 0;">Problem Formulation</h2>
+          <h2 class="subsection-title">Problem Formulation</h2>
           <div class="content has-text-justified">
             <p class="math-content">
               For fixed-base manipulators, we formulate the base placement challenge as an optimization problem.
@@ -231,14 +231,14 @@
             </p>
 
             <ol>
-              <li>Base placement limits: \({\boldsymbol{q}^b}^{m} \preccurlyeq \boldsymbol{q}^b \preccurlyeq
+              <li><b>Base placement limits:</b> \({\boldsymbol{q}^b}^{m} \preccurlyeq \boldsymbol{q}^b \preccurlyeq
                 {\boldsymbol{q}^b}^{M},\) where \({\boldsymbol{q}^b}^{m}\) and \({\boldsymbol{q}^b}^{M}\) define the
                 lower and upper bounds.</li>
-              <li>Joint limits: \({\boldsymbol{q}^m}^{m} \preccurlyeq \boldsymbol{q}^m_i \preccurlyeq
-                {\boldsymbol{q}^m}^{M}, \quad i = 1, 2, \ldots, t\) with \({\boldsymbol{q}^m}^m\) and
+              <li><b>Joint limits:</b> \({\boldsymbol{q}^m}^{m} \preccurlyeq \boldsymbol{q}^m_i \preccurlyeq
+                {\boldsymbol{q}^m}^{M}\) with \({\boldsymbol{q}^m}^m\) and
                 \({\boldsymbol{q}^m}^M\) representing the lower and upper bounds.</li>
-              <li>Collision-free configurations: \(\text{sd}(\boldsymbol{q}^b,\boldsymbol{q}^{m}_{i})\geq 0,\quad i = 1,
-                2, \ldots, t,\) where \(\text{sd}(\cdot)\) denotes the signed distance function.</li>
+              <li><b>Collision-free configurations:</b> \(\text{sd}(\boldsymbol{q}^b,\boldsymbol{q}^{m}_{i})\geq 0,\)
+                where \(\text{sd}(\cdot)\) denotes the signed distance function.</li>
             </ol>
 
             <p class="math-content">
@@ -250,15 +250,51 @@
               \[f(\boldsymbol{q}^b,\boldsymbol{q}^{m}_{1:t}) = \sum_{i=1}^{t-1}
               \|\boldsymbol{q}^{m}_{i+1}-\boldsymbol{q}^{m}_{i}\|_1.\]
             </p>
+          </div>
+
+          <h2 class="subsection-title">Two-Layer Optimization of B*</h2>
+          <div class="content has-text-justified">
+            <p class="math-content">
+              B* addresses the inherently non-convex base placement problem through a two-layer hierarchical
+              optimization framework:
+            </p>
+            <ol>
+              <li><b>Outer layer with progressive constraint tightening:</b> The terminal optimization
+                problem is temporarily reformulated into a more tractable form through systematic constraint relaxation,
+                particularly the base mobility constraint. Specifically, <b>we treat the fixed base as mobile</b>,
+                transforming
+                the timestep-invariant base configuration \(\boldsymbol{q}^b\) into a time-varying sequence
+                \(\boldsymbol{q}^b_{1:t}\), effectively introducing three additional \ac{dof} per timestep. To ensure
+                convergence to a fixed base configuration, we introduce a base movement penalty with an
+                iteration-dependent coefficient \(\mu(j)\) that increases with outer loop iteration \(j\) The modified
+                objective function \(f'(\boldsymbol{q}^b_{1:t},\boldsymbol{q}^{m}_{1:t};\mu(j))\) becomes:
+
+                <p class="math-content">
+                  \[f'(\boldsymbol{q}^b_{1:t},\boldsymbol{q}^{m}_{1:t};\mu(j)) =
+                  f(\boldsymbol{q}^b_{1:t},\boldsymbol{q}^{m}_{1:t}) +
+                  \mu(j)\sum_{i=1}^{t}\|\boldsymbol{q}^{b}_{i}-\bar{\boldsymbol{q}}^{b}\|_1,\]
+                </p>
+
+                <p class="math-content">
+                  where \(\bar{\boldsymbol{q}}^{b}\) is the arithmetic mean of base poses across all steps. 
+                </p>
+
+              </li>
+              <li><b>Inner Layer:</b> Addresses the non-convexities of each outer-layer subproblem by sequential local
+                linearization.</li>
+            </ol>
+            <p class="math-content">
+              The two-layer hierarchical
+              optimization framework effectively transforms the original problem into a tractable sequential linear
+              programming (SLP).
+            </p>
 
             <p class="math-content">
               For a more detailed analysis and complete methodology, please refer to our paper.
             </p>
           </div>
-          <h2 class="subsection-title" style="font-size: 1.4rem; font-weight: bold; margin: 1.5rem 0 1rem 0;">Two-Layer Optimization of B*</h2>
         </div>
       </div>
-    </div>
   </section>
   <!-- End B* method -->
 
