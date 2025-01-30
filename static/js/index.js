@@ -17,5 +17,4 @@ $(document).ready(function () {
     var carousels = bulmaCarousel.attach('.carousel', options);
 
     bulmaSlider.attach();
-
 })
