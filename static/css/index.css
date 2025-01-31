@@ -8,8 +8,7 @@ body {
 }
 
 .link-block a {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin: 1rem 0;
 }
 
 .dnerf {
@@ -107,9 +106,9 @@ body {
 }
 
 .results-carousel .item {
-  margin: 5px;
+  margin: 1rem;
   overflow: hidden;
-  padding: 20px;
+  padding: 1.5rem;
   font-size: 0;
 }
 
@@ -130,17 +129,17 @@ body {
   width: 70%;
   height: auto;
   display: block;
-  margin: 0 auto;
+  margin: 1.5rem auto;
 }
 
 .section figure figcaption {
-  margin-top: 1rem;
+  margin: 1rem 0;
 }
 
 .subsection-title {
   font-size: 1.4rem;
   font-weight: bold;
-  margin: 1.5rem 0 1rem 0;
+  margin: 1.5rem 0;
 }
 
 .math-content {
@@ -152,5 +151,5 @@ ol {
 }
 
 li {
-  margin: 0.5rem 0;
+  margin: 1rem 0;
 }
