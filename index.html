@@ -107,6 +107,17 @@
                   </a>
                 </span>
 
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2504.12719" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
                 <!-- Github link -->
                 <span class="link-block">
                   <a href="https://github.com/leiyaocui/B_STAR" target="_blank"
@@ -118,14 +129,14 @@
                   </a>
                 </span>
 
-                <!-- ArXiv abstract Link -->
+                <!-- Github link -->
                 <span class="link-block">
-                  <a href="https://arxiv.org/abs/2504.12719" target="_blank"
+                  <a href="https://github.com/SiruiXie/BSTAR_ARM_EXP" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
-                      <i class="ai ai-arxiv"></i>
+                      <i class="fab fa-github"></i>
                     </span>
-                    <span>arXiv</span>
+                    <span>Code</span>
                   </a>
                 </span>
               </div>
@@ -141,18 +152,35 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column">
-          <h2 class="subsection-title" style="margin: 0 0 1rem 0;">Proper Base Placement is Crucial for Task Execution Feasibility</h2>
-          <img src="static/images/teaser_website.svg" alt="Teaser" style="width:100%; max-width:100%; margin-bottom: 4rem;">
+          <h2 class="subsection-title" style="margin: 0 0 1rem 0;">Proper Base Placement is Crucial for Task Execution
+            Feasibility</h2>
+          <img src="static/images/teaser_website.svg" alt="Teaser"
+            style="width:100%; max-width:100%; margin-bottom: 4rem;">
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
-            <p>Proper base placement is crucial for task execution feasibility and performance of fixed-base manipulators, the dominant solution in robotic automation.
-              Current methods rely on pre-computed kinematics databases generated through sampling to search for solutions. However, they face an inherent trade-off between solution optimality and computational efficiency when determining sampling resolution—a challenge that intensifies when considering long-horizon trajectories, self-collision avoidance, and task-specific requirements.
-              To address these limitations, we present B*, a novel optimization framework for determining the optimal base placement that unifies these multiple objectives without relying on pre-computed databases.
-              B* addresses this inherently non-convex problem via a two-layer hierarchical approach: The outer layer systematically manages terminal constraints through progressively tightening them, particularly the base mobility constraint, enabling feasible initialization and broad solution space exploration. Concurrently, the inner layer addresses the non-convexities of each outer-layer subproblem by sequential local linearization, effectively transforming the original problem into a tractable sequential linear program (SLP).
-              Comprehensive evaluations across multiple robot platforms and task complexities demonstrate the effectiveness of B*: it achieves solution optimality five orders of magnitude better than sampling-based approaches while maintaining perfect success rates, all with reduced computational overhead.
-              Operating directly in configuration space, B* not only solves the base placement problem but also enables simultaneous path planning with customizable optimization criteria, making it a versatile framework for various robotic motion planning challenges.
-              B* serves as a crucial initialization tool for robotic applications, bridging the gap between theoretical motion planning and practical deployment where feasible trajectory existence is fundamental. 
-              </p>
+            <p>Proper base placement is crucial for task execution feasibility and performance of fixed-base
+              manipulators, the dominant solution in robotic automation.
+              Current methods rely on pre-computed kinematics databases generated through sampling to search for
+              solutions. However, they face an inherent trade-off between solution optimality and computational
+              efficiency when determining sampling resolution—a challenge that intensifies when considering long-horizon
+              trajectories, self-collision avoidance, and task-specific requirements.
+              To address these limitations, we present B*, a novel optimization framework for determining the optimal
+              base placement that unifies these multiple objectives without relying on pre-computed databases.
+              B* addresses this inherently non-convex problem via a two-layer hierarchical approach: The outer layer
+              systematically manages terminal constraints through progressively tightening them, particularly the base
+              mobility constraint, enabling feasible initialization and broad solution space exploration. Concurrently,
+              the inner layer addresses the non-convexities of each outer-layer subproblem by sequential local
+              linearization, effectively transforming the original problem into a tractable sequential linear program
+              (SLP).
+              Comprehensive evaluations across multiple robot platforms and task complexities demonstrate the
+              effectiveness of B*: it achieves solution optimality five orders of magnitude better than sampling-based
+              approaches while maintaining perfect success rates, all with reduced computational overhead.
+              Operating directly in configuration space, B* not only solves the base placement problem but also enables
+              simultaneous path planning with customizable optimization criteria, making it a versatile framework for
+              various robotic motion planning challenges.
+              B* serves as a crucial initialization tool for robotic applications, bridging the gap between theoretical
+              motion planning and practical deployment where feasible trajectory existence is fundamental.
+            </p>
           </div>
           <h2 class="subsection-title">Base Placement Optimization and Simultaneous Path Planning Using B* Algorithm
           </h2>
@@ -425,6 +453,24 @@
   </section>
   <!-- End Quantitative results -->
 
+  <!-- Real-world results -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title">Real-World Validations</h2>
+          <h2 class="subsection-title">Optimization Process of B*</h2>
+          <div style="padding:56.25% 0 0 0;position:relative;"><iframe
+              src="https://player.vimeo.com/video/1096935900?h=4ef10dfe88&badge=0&autopause=0&player_id=0&app_id=58479"
+              frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+              style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Supplementary Video"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End real-world results --> 
+
   <!-- Paper acknowledgment -->
   <section class="section hero" style="padding-top: 0;">
     <div class="container is-max-desktop">
@@ -452,7 +498,7 @@
       <pre><code>@article{zhao2025b,
   title={B*: Efficient and Optimal Base Placement for Fixed-Base Manipulators},
   author={Zhao, Zihang and Cui, Leiyao and Xie, Sirui and Zhang, Saiyao and Han, Zhi and Ruan, Lecheng and Zhu, Yixin},
-  journal={arXiv preprint arXiv:2504.12719},
+  journal={IEEE Robotics and Automation Letters (RA-L)},
   year={2025}
 }</code></pre>
     </div>
@@ -468,7 +514,8 @@
               This page was built using the
               <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project
                 Page Template</a>
-              which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.<br />
+              which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project
+              page.<br />
               This website is licensed under a
               <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons
                 Attribution-ShareAlike 4.0 International
